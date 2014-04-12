@@ -77,24 +77,28 @@ public class SpawnEventHandler implements Listener {
 	}
 	
 	public Location getRandomSpawnLocation(Player p, Location loc, boolean doOverride){
-		if (doOverride){
-			plugin.getLogger().info("Override true. New coordinates generated.");
-			double randX = (Math.random()*12000)-6000;
-			double randZ = (Math.random()*12000)-6000;
-			loc.setX(randX);
-			loc.setZ(randZ);
-		}
-		if (loc.getBlock().getType().isSolid()){
-			plugin.getLogger().info("Got a good spawn location for "+p.getName()+"!");
-			loc.setY(loc.getY()+2);
-			if (loc.getBlock().getType()==Material.WATER || loc.getBlock().getType()==Material.LAVA){
-				return getRandomSpawnLocation(p, loc, true);
+		if (!p.hasPermission("randomspawn.norandspawn")){
+			if (doOverride){
+				plugin.getLogger().info("Override true. New coordinates generated.");
+				double randX = (Math.random()*12000)-6000;
+				double randZ = (Math.random()*12000)-6000;
+				loc.setX(randX);
+				loc.setZ(randZ);
 			}
-			return loc;
+			if (loc.getBlock().getType().isSolid()){
+				plugin.getLogger().info("Got a good spawn location for "+p.getName()+"!");
+				loc.setY(loc.getY()+2);
+				if (loc.getBlock().getType()==Material.WATER || loc.getBlock().getType()==Material.LAVA){
+					return getRandomSpawnLocation(p, loc, true);
+				}
+				return loc;
+			} else {
+				//plugin.getLogger().info("Got bad spawn location for "+p.getName()+": Non-Solid");
+				loc.setY(loc.getY()-1);
+				return getRandomSpawnLocation(p, loc, false);
+			}
 		} else {
-			//plugin.getLogger().info("Got bad spawn location for "+p.getName()+": Non-Solid");
-			loc.setY(loc.getY()-1);
-			return getRandomSpawnLocation(p, loc, false);
+			return p.getLocation().getWorld().getSpawnLocation();
 		}
 	}
 }
