@@ -1,0 +1,12 @@
+name: RandomSpawn
+version: 01.00.00
+main: me.capit.RandomSpawn.RandomSpawn
+
+website: https://github.com/Wehttam664/RandomSpawn/wiki
+description: GameData_RandomSpawn
+author: Wehttam664
+preix: RandomSpawn
+    
+permissions:
+  randomspawn.norandspawn:
+    description: 'Player does not spawn randomly.'
