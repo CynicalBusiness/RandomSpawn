@@ -20,6 +20,7 @@ public class RandomSpawn extends JavaPlugin{
 		handler = new SpawnEventHandler(this);
 		this.getServer().getPluginManager().registerEvents(handler, this);
 		this.getLogger().info("RandomSpawn ready.");
+		saveDefaultConfig();
 	}
 	
 	@Override
