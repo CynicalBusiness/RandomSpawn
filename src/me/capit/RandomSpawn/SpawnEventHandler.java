@@ -98,6 +98,7 @@ public class SpawnEventHandler implements Listener {
 				return getRandomSpawnLocation(p, loc, false);
 			}
 		} else {
+			plugin.getLogger().info("Player had norandspawn permission!");
 			return p.getLocation().getWorld().getSpawnLocation();
 		}
 	}
